@@ -11,13 +11,16 @@
         android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="30dp">
-    
+
+
     <ProgressBar
         android:id="@+id/myProgressBar"
         android:layout_weight="0.1"
         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
 
         <ImageView
             android:id="@+id/myImageView"
@@ -27,7 +30,7 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
-    
+
     <WebView
         android:id="@+id/myWebView"
         android:layout_width="match_parent"
