@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
    //method to go back and don't close the app
     @Override
-    public void onBackPressed(){
-        super.onBackPressed();
+    public void onBackPressed() {
+
         if (superWebView.canGoBack()){
             superWebView.goBack();
         }
