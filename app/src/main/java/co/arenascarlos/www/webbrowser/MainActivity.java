@@ -1,5 +1,6 @@
 package co.arenascarlos.www.webbrowser;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -21,13 +23,18 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar superProgressBar;
     ImageView superImageView;
     WebView superWebView;
-    String url = "http://";
+
+    String currentURL = "http://";
+    LinearLayout  superLinearLayout;
+    String myCurrentUrl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        superLinearLayout = findViewById(R.id.myLinearLayout);
         superProgressBar = findViewById(R.id.myProgressBar);
         superImageView = findViewById(R.id.myImageView);
         superWebView = findViewById(R.id.myWebView);
@@ -42,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
         superWebView.getSettings().setJavaScriptEnabled(true);
 
         //permition to open that url
-        superWebView.setWebViewClient(new WebViewClient());
+        superWebView.setWebViewClient(new WebViewClient(){
+
+        });
 
         //set up chrome client
         superWebView.setWebChromeClient(new WebChromeClient(){
@@ -69,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         superWebView = (WebView) findViewById(R.id.myWebView);
         superWebView.setWebViewClient(new WebViewClient());
         superWebView.getSettings().setJavaScriptEnabled(true);
-        superWebView.loadUrl(url);
+        superWebView.loadUrl(currentURL);
 
 
         Button btn = (Button)findViewById(R.id.button);
@@ -105,6 +114,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_refresh:
                 superWebView.reload();
                 break;
+
+            case R.id.menu_share:
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT,myCurrentUrl);
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Copied URL");
+                startActivity(Intent.createChooser(shareIntent, "Share URL with Friends"));
 
         }
 
