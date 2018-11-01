@@ -3,17 +3,25 @@ package co.arenascarlos.www.webbrowser;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar superProgressBar;
     ImageView superImageView;
     WebView superWebView;
+    String url = "http://";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +66,63 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        superWebView = (WebView) findViewById(R.id.myWebView);
+        superWebView.setWebViewClient(new WebViewClient());
+        superWebView.getSettings().setJavaScriptEnabled(true);
+        superWebView.loadUrl(url);
+
+
+        Button btn = (Button)findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText t = (EditText) findViewById(R.id.url);
+                superWebView.loadUrl(t.getText().toString());
+            }
+        });
+
     }
 
-   //method to go back and don't close the app
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.super_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.menu_back:
+                onBackPressed();
+                break;
+
+            case R.id.menu_forward:
+                onForwarsPressed();
+                break;
+
+            case R.id.menu_refresh:
+                superWebView.reload();
+                break;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void onForwarsPressed(){
+        if (superWebView.canGoForward()){
+            superWebView.goForward();
+        } else {
+            Toast.makeText(this, "can't go forward!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+
+    //method to go back and don't close the app
     @Override
     public void onBackPressed() {
 
