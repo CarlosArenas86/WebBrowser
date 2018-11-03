@@ -11,7 +11,7 @@ package co.arenascarlos.www.webbrowser;
 *
 * 3. los botones de arriba de la app funcionan bien pero cree un boton de bookmark que no lo hago funcionar aun porque
 * no se como guardar listas del historial de link navegados, mi idea es que el usuario haga click en ese boton de bookmark
-* y que la pagina que esta en el edittext de URL se guarde como lista y se pueda ver.
+* y que la pagina que esta en el edittext de URL se guarde como lista y se pueda ver..
 *
 *
 * */
