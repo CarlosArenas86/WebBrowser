@@ -15,6 +15,12 @@
         android:title="Forward" />
 
     <item
+        android:id="@+id/menu_Book"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_bookmark_black_24dp"
+        android:title="Backward" />
+
+    <item
         android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_refresh_black_24dp"
         android:title="Refresh" />
