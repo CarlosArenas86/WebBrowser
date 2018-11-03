@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-
         superLinearLayout = findViewById(R.id.myLinearLayout);
         superProgressBar = findViewById(R.id.myProgressBar);
         superImageView = findViewById(R.id.myImageView);
@@ -64,10 +62,11 @@ public class MainActivity extends AppCompatActivity {
         superWebView.loadUrl("https://www.google.com");
 
         // add js to the webView
-        superWebView.getSettings().setJavaScriptEnabled(true);
+      //  superWebView.getSettings().setJavaScriptEnabled(true);
 
         //permition to open that url
         superWebView.setWebViewClient(new WebViewClient() {
+
 
             //method to received error.
 //            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                superProgressBar.setProgress(newProgress);
+               superProgressBar.setProgress(newProgress);
 
             }
 
@@ -106,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 super.onReceivedIcon(view, icon);
                 superImageView.setImageBitmap(icon);
             }
+
+
         });
 
         superWebView = (WebView) findViewById(R.id.myWebView);
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText t = (EditText) findViewById(R.id.myurl);
+                EditText t = (EditText) findViewById(R.id.myURL);
 
 
                 String add = adjustURl(t.getText().toString());
@@ -177,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 
     //method to go back and don't close the app
     @Override
