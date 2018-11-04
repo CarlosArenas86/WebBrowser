@@ -1,21 +1,5 @@
 package co.arenascarlos.www.webbrowser;
 
-/*
-* 1. al escribir la direccion en el edittext y darle click al boton, salta a la pagina correctamente
-*pero al ingresar a youtube y darle click a algun video, no puedo ver la reproduccion del video,
-*  y el cuadro para ingresar otra direccion URL se me va se pierde.
-*
-* 2. como puedo hacerla compatible con otros dispositivos moviles? cree en la carpeta res, tres nuevos directorios
-* con nombres "layout-small, layout-large y layout-xlarge" mi pero no las puedo ver, el sistema no me las muestra,
-* mi idea es copiar los layout en esas carpetas y hacerlas compatibles con dispositivos small, large y xtralarge.
-*
-* 3. los botones de arriba de la app funcionan bien pero cree un boton de bookmark que no lo hago funcionar aun porque
-* no se como guardar listas del historial de link navegados, mi idea es que el usuario haga click en ese boton de bookmark
-* y que la pagina que esta en el edittext de URL se guarde como lista y se pueda ver..
-*
-*
-* */
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     WebView superWebView;
 
     LinearLayout superLinearLayout;
-    String myCurrentUrl;
+    String myURL;
 
 
     @Override
@@ -49,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        superLinearLayout = findViewById(R.id.myLinearLayout);
-        superProgressBar = findViewById(R.id.myProgressBar);
-        superImageView = findViewById(R.id.myImageView);
-        superWebView = findViewById(R.id.myWebView);
+        superLinearLayout = findViewById(R.id.LinearLayout);
+        superProgressBar = findViewById(R.id.ProgressBar);
+        superImageView = findViewById(R.id.ImageView);
+        superWebView = findViewById(R.id.WebView);
 
 
         //set the max percentage.
@@ -62,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         superWebView.loadUrl("https://www.google.com");
 
         // add js to the webView
-      //  superWebView.getSettings().setJavaScriptEnabled(true);
+         superWebView.getSettings().setJavaScriptEnabled(true);
 
-        //permition to open that url
+        //permission to open that url
         superWebView.setWebViewClient(new WebViewClient() {
 
 
@@ -90,14 +74,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-               superProgressBar.setProgress(newProgress);
+                superProgressBar.setProgress(newProgress);
 
             }
 
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                getSupportActionBar().setTitle(title);
+                getSupportActionBar();
             }
 
             @Override
@@ -109,23 +93,22 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        superWebView = (WebView) findViewById(R.id.myWebView);
+        superWebView =  findViewById(R.id.WebView);
         superWebView.setWebViewClient(new WebViewClient());
-        superWebView.getSettings().setJavaScriptEnabled(true);
-        superWebView.loadUrl(myCurrentUrl);
+       // superWebView.getSettings().setJavaScriptEnabled(true);
+        superWebView.loadUrl(myURL);
 
 
-        Button btn = (Button) findViewById(R.id.button);
+        Button btn =  findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText t = (EditText) findViewById(R.id.myURL);
-
+                EditText t =  findViewById(R.id.myURL);
 
                 String add = adjustURl(t.getText().toString());
 
 
-                superWebView.loadUrl(add);
+               superWebView.loadUrl(add);
             }
         });
 
@@ -161,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_share:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, myCurrentUrl);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, myURL);
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Copied URL");
                 startActivity(Intent.createChooser(shareIntent, "Share URL with Friends"));
 
@@ -190,23 +173,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
