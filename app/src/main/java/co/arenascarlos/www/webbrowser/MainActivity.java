@@ -46,27 +46,10 @@ public class MainActivity extends AppCompatActivity {
         superWebView.loadUrl("https://www.google.com");
 
         // add js to the webView
-         superWebView.getSettings().setJavaScriptEnabled(true);
+        superWebView.getSettings().setJavaScriptEnabled(true);
 
         //permission to open that url
-        superWebView.setWebViewClient(new WebViewClient() {
-
-
-            //method to received error.
-//            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-//
-//                EditText t = (EditText) findViewById(R.id.url);
-//                t.setText("Errror " + failingUrl);
-//                superWebView.loadUrl("https://www.google.co.nz/search?q=youtube&rlz=1C5CHFA_enNZ814NZ814&oq="
-//                        + failingUrl + "&aqs=chrome..69i57j69i60l5.2511j0j4&sourceid=chrome&ie=UTF-8");
-//
-//            }
-//
-//            public void onPageFinished(WebView view, String url) {
-//                // do your stuff here
-//
-//            }
-        });
+        superWebView.setWebViewClient(new WebViewClient());
 
         //set up chrome client
         superWebView.setWebChromeClient(new WebChromeClient() {
@@ -95,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
         superWebView =  findViewById(R.id.WebView);
         superWebView.setWebViewClient(new WebViewClient());
-       // superWebView.getSettings().setJavaScriptEnabled(true);
         superWebView.loadUrl(myURL);
 
 
